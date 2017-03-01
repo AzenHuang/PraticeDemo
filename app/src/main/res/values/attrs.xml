@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Customize">
+        <attr name="attr_one" format="string" />
+        <attr name="attr_two" format="string" />
+        <attr name="attr_three" format="string" />
+        <attr name="attr_four" format="string" />
+    </declare-styleable>
+
+    <attr name="CustomizeStyle" format="reference" />
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" format="dimension" />
+        <attr name="type">
+            <enum name="circle" value="0" />
+            <enum name="round" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="TagsLayout">
+        <attr name="maxWidth" format="dimension">
+            <enum name="parent" value="-1"/>
+            <enum name="device" value="-2"/>
+            <enum name="unspecific" value="-3"/>
+        </attr>
+
+        <attr name="maxWidthScale" format="float" />
+
+        <attr name="rowAlign">
+            <enum name="top" value="-1"/>
+            <enum name="bottom" value="-2"/>
+            <enum name="center" value="-3"/>
+        </attr>
+
+        <attr name="maxRowCount" format="integer">
+            <enum name="adjust" value="-1"/>
+        </attr>
+
+        <attr name="horizontalSpace" format="dimension"/>
+        <attr name="verticalSpace" format="dimension"/>
+
+    </declare-styleable>
+
+</resources>

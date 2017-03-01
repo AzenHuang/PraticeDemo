@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@android:color/holo_orange_light">
+
+    <com.github.azenhuang.praticedemo.layout.TagsLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:background="@android:color/holo_green_light"
+        app:maxWidth="device"
+        app:lineSpace="30dp"
+        app:lineAlign="center">
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejlfa"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/holo_blue_light"
+            android:text="kvalie"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="djl;va;"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejsefn;lkaeje;jvna;kleji;"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/holo_blue_light"
+            android:text="kvaliesfevase"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="djl;va;"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
+
+    </com.github.azenhuang.praticedemo.layout.TagsLayout>
+
+    <com.github.azenhuang.praticedemo.layout.TagsLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_green_light"
+        app:maxWidth="parent">
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejlfa"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshihsdfoiaenlkvaefnkvalie"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshidjl;va;"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
+
+    </com.github.azenhuang.praticedemo.layout.TagsLayout>
+
+
+    <com.github.azenhuang.praticedemo.layout.TagsLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_green_light"
+        app:maxWidth="300dp">
+
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejlfa"/>
+        <TextView
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshihsdfoiaenlkvaefnkvalie"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshidjl;va;"/>
+
+        <TextView
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_light"
+            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
+
+    </com.github.azenhuang.praticedemo.layout.TagsLayout>
+
+
+
+</LinearLayout>
