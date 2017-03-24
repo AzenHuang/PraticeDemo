@@ -1,6 +1,7 @@
 package com.github.azenhuang.praticedemo.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
         demoInfoList.add(new DemoInfo("CustomTextView", CustomViewActivity.class, CustomViewActivity.makeExtraBundle(R.layout.activity_custom_text_view)));
         demoInfoList.add(new DemoInfo("RoundImageView", RoundImageViewActivity.class, null));
         demoInfoList.add(new DemoInfo("TagsLayout", CustomViewActivity.class, CustomViewActivity.makeExtraBundle(R.layout.activity_tags_layout)));
+        demoInfoList.add(new DemoInfo("FlowLayout", TagsLayoutActivity.class, CustomViewActivity.makeExtraBundle(R.layout.activity_tags_layout)));
+        demoInfoList.add(new DemoInfo("HandlerActivity", HandlerActivity.class, null));
+        demoInfoList.add(new DemoInfo("SafeHandlerActivity", SafeHandlerActivity.class, null));
+        demoInfoList.add(new DemoInfo("AsyncTaskActivity", AsyncTaskActivity.class, null));
+
     }
 
     class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> implements View.OnClickListener{

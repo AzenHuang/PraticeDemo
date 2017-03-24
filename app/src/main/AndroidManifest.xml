@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.github.azenhuang.praticedemo">
 
     <application
@@ -21,6 +22,18 @@
             android:hardwareAccelerated="false" />
 
         <activity android:name=".activity.RoundImageViewActivity"
+            android:theme="@style/NoActionBarTheme"/>
+
+        <activity android:name=".activity.TagsLayoutActivity"
+            android:theme="@style/NoActionBarTheme"/>
+
+        <activity android:name=".activity.HandlerActivity"
+            android:theme="@style/NoActionBarTheme"/>
+
+        <activity android:name=".activity.SafeHandlerActivity"
+            android:theme="@style/NoActionBarTheme"/>
+
+        <activity android:name=".activity.AsyncTaskActivity"
             android:theme="@style/NoActionBarTheme"/>
 
     </application>

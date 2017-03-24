@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.SparseIntArray;
@@ -45,7 +46,7 @@ public class TagsLayout extends ViewGroup {
     /**
      * 最多允许行数
      */
-    private int maxLines;
+    private int maxRowCount;
 
     private int actualLines;
 
@@ -88,10 +89,14 @@ public class TagsLayout extends ViewGroup {
 
     private void initFromAttributes(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         final TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TagsLayout, defStyleAttr, defStyleRes);
-        maxWidth = typedArray.getLayoutDimension(R.styleable.TagsLayout_maxWidth, "maxWidth");
+        if (typedArray.hasValue(R.styleable.TagsLayout_maxWidth)) {
+            maxWidth = typedArray.getLayoutDimension(R.styleable.TagsLayout_maxWidth, "maxWidth");
+        } else {
+            maxWidth = MAX_WIDTH_UNSPECIFIC;
+        }
         maxWidthScale = typedArray.getFloat(R.styleable.TagsLayout_maxWidthScale, 1);
         rowAlign = typedArray.getInt(R.styleable.TagsLayout_rowAlign, ALIGN_CENTER);
-        maxLines = typedArray.getInt(R.styleable.TagsLayout_maxRowCount, MAX_ROW_COUNT_ADJUST);
+        maxRowCount = typedArray.getInt(R.styleable.TagsLayout_maxRowCount, 1);
 //        horizontalSpace = typedArray.getDimensionPixelSize(R.styleable.TagsLayout_horizontalSpace, (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, context.getResources().getDisplayMetrics()));
         verticalSpace = typedArray.getDimensionPixelSize(R.styleable.TagsLayout_verticalSpace, 0);
         horizontalSpace = typedArray.getDimensionPixelSize(R.styleable.TagsLayout_horizontalSpace, 0);
@@ -104,20 +109,26 @@ public class TagsLayout extends ViewGroup {
         int count = getChildCount();
         int horizontalPadding = getPaddingLeft() + getPaddingRight();
         int verticalPadding = getPaddingTop() + getPaddingBottom();
-        int specWith = MeasureSpec.getSize(widthMeasureSpec);
-        int specHeight = MeasureSpec.getSize(heightMeasureSpec);
+        int specWidthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int specHeightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int specWidthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int specHeightMode = MeasureSpec.getMode(heightMeasureSpec);
 
-        int maxTagsWidth;
-        //获取所有tag合起来的最大宽度
+
+        float maxScaledWidth;
         if (maxWidth >= 0) {
-            maxTagsWidth = Math.min((int) (maxWidth * maxWidthScale), specWith) - horizontalPadding;
+            maxScaledWidth = maxWidth * maxWidthScale;
         } else if (maxWidth == MAX_WIDTH_PARENT) {
-            maxTagsWidth = Math.min((int) (specWith * maxWidthScale), specWith) - horizontalPadding;
+            maxScaledWidth = specWidthSize * maxWidthScale;
         } else if (maxWidth == MAX_WIDTH_DEVICE) {
-            maxTagsWidth = Math.min((int) (deviceWidth * maxWidthScale), specWith) - horizontalPadding;
+            maxScaledWidth = deviceWidth * maxWidthScale;
         } else {
-            maxTagsWidth = specWith - horizontalPadding;
+            maxScaledWidth = specWidthSize;
         }
+        //一行的最大宽度
+        int maxRowWidth = (int) (specWidthMode == MeasureSpec.UNSPECIFIED ? (1 << 30 - 1) : Math.min(maxScaledWidth, specWidthSize) - horizontalPadding);
+        //layout最大高度限制
+        int maxTotalHeight = specHeightMode == MeasureSpec.UNSPECIFIED ? (1 << 30 - 1) : specHeightSize - verticalPadding;
 
         int lineMaxHeight = 0;
         int lineMaxWidth = 0;
@@ -137,42 +148,58 @@ public class TagsLayout extends ViewGroup {
             }
 
             LayoutParams childParams = (LayoutParams) child.getLayoutParams();
-            // Measure the child.
-            measureChild(child, widthMeasureSpec, heightMeasureSpec);
 
             if (isTagsOverflow) {
                 childParams.visible = false;
             } else {
+                // Measure the child.
+                measureChild(child, MeasureSpec.makeMeasureSpec(maxRowWidth, MeasureSpec.AT_MOST),
+                        MeasureSpec.makeMeasureSpec(maxTotalHeight - realHeight, MeasureSpec.AT_MOST));
+
                 int childHeight = child.getMeasuredHeight() + childParams.topMargin + childParams.bottomMargin;
                 int childWidth = child.getMeasuredWidth() + childParams.leftMargin + childParams.rightMargin;
-                if (isInLineRange(currentRow)) {
-                    if ((childHeight > lineMaxHeight) && (realHeight - lineMaxHeight + childHeight > specHeight - verticalPadding)) {
-                        //加上本行的高度已经超出layout的高度限制
+                if (isInRowRange(currentRow)) { //行数符合最大行数限制
+                    //先判断是否能在当前行放下该child
+                    //判断child的高度放在当前行是否满足要求
+                    if ((childHeight > lineMaxHeight) && (realHeight - lineMaxHeight + childHeight > maxTotalHeight)) {
+                        //加上本行的高度已经超出layout的高度限制，因此不满足高度要求
                         childParams.visible = false;
                         isTagsOverflow = true;
-                    } else {
-                        if (checkChildWidth(child.getMeasuredWidth(), childParams, maxTagsWidth)) {
-                            int tempWidth = lineMaxWidth + childWidth;
-                            if (tempWidth > maxTagsWidth) {
-                                if (currentRow == maxLines) { //没有下一行可以放
+                    } else { //满足放在当前行的高度要求
+                        if (isChildInMaxWidthLimit(child.getMeasuredWidth(), childParams, maxRowWidth)) {
+                            //child宽度（含左右间距）在最大宽度限制之内
+                            int tempWidth = childWidth + (lineMaxWidth == 0 ? 0 : lineMaxWidth + horizontalSpace);
+                            if (tempWidth > maxRowWidth) { //child放在当前行，宽度超出
+                                //判断是否能放在下一行
+                                if (isInRowRange(currentRow + 1)) { //新的下一行
+                                    int tempRealHeight = realHeight + childHeight + verticalSpace;
+                                    //满足放在新一行的高度限制，由于已在最大宽度限制内，因此宽度必满足要求
+                                    if (tempRealHeight <= maxTotalHeight) {
+                                        //child放在新的一行
+                                        childParams.visible = true;
+
+                                        currentRow++;
+                                        lineMaxWidth = childWidth;
+                                        lineMaxHeight = childHeight;
+
+                                        lineLastChildIndexMap.put(currentRow, i);
+                                        lineMaxHeightMap.put(currentRow, lineMaxHeight);
+
+                                        realWidth = Math.max(realWidth, lineMaxWidth);
+                                        realHeight = tempRealHeight;
+
+                                        childState = combineMeasuredStates(childState, child.getMeasuredState());
+                                    } else {
+                                        childParams.visible = false;
+                                        isTagsOverflow = true;
+                                    }
+
+                                } else { //没有下一行可以放
                                     childParams.visible = false;
                                     isTagsOverflow = true;
-                                } else { //放到新的一行
-                                    currentRow++;
-                                    childParams.visible = true;
-                                    lineMaxWidth = childWidth;
-                                    lineMaxHeight = childHeight;
-
-                                    lineLastChildIndexMap.put(currentRow, i);
-                                    lineMaxHeightMap.put(currentRow, lineMaxHeight);
-
-                                    realWidth = Math.max(realWidth, lineMaxWidth);
-                                    realHeight += childHeight + verticalSpace;
-
-                                    childState = combineMeasuredStates(childState, child.getMeasuredState());
                                 }
 
-                            } else { //放在既有的一行
+                            } else { //child宽度符合放在当前行，放置child
                                 childParams.visible = true;
                                 lineMaxWidth = tempWidth;
                                 realWidth = Math.max(realWidth, lineMaxWidth);
@@ -188,7 +215,6 @@ public class TagsLayout extends ViewGroup {
                         } else { //该child宽度已超出最长宽度
                             childParams.visible = false;
                             isTagsOverflow = true;
-                            continue;
                         }
                     }
 
@@ -212,18 +238,24 @@ public class TagsLayout extends ViewGroup {
                 resolveSizeAndState(height, heightMeasureSpec, childState << MEASURED_HEIGHT_STATE_SHIFT));
     }
 
-    private boolean isInLineRange(int currentRow) {
-        return maxLines < 0 ? true : currentRow <= maxLines;
+    private boolean isInRowRange(int currentRow) {
+        return maxRowCount < 0 ? true : currentRow <= maxRowCount;
     }
 
-    //检查child宽度是否在最大宽度范围内
-    private boolean checkChildWidth(int childWidth, LayoutParams childParams, int maxTagsWidth) {
-        if (childWidth + childParams.leftMargin + childParams.rightMargin > maxTagsWidth) {
-            childParams.visible = false;
-            return false;
-        } else {
+
+    //child宽度是否在最大宽度范围内
+    private boolean isChildInMaxWidthLimit(int childWidth, LayoutParams childParams, int maxTagsWidth) {
+        return childWidth + childParams.leftMargin + childParams.rightMargin <= maxTagsWidth;
+    }
+
+    @Override
+    protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+        LayoutParams params = (LayoutParams) child.getLayoutParams();
+
+        if (child.getVisibility() == GONE || !params.visible) {
             return true;
         }
+        return super.drawChild(canvas, child, drawingTime);
     }
 
     @Override
@@ -231,7 +263,7 @@ public class TagsLayout extends ViewGroup {
         final int count = getChildCount();
         int curLeft = getPaddingLeft();
         int curTop;
-        int currentLine = 1;
+        int currentRow = 1;
         int verticalOffset = getPaddingTop();
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
@@ -240,12 +272,13 @@ public class TagsLayout extends ViewGroup {
             if (child.getVisibility() == GONE || !params.visible) {
                 continue;
             }
-            if (i > lineLastChildIndexMap.get(currentLine)) {
-                if (currentLine < actualLines) {
-                    verticalOffset += lineMaxHeightMap.get(currentLine) + verticalSpace;
+
+            if (i > lineLastChildIndexMap.get(currentRow)) {
+                if (currentRow < actualLines) {
+                    verticalOffset += lineMaxHeightMap.get(currentRow) + verticalSpace;
                     curLeft = getPaddingLeft();
-                    currentLine++;
-                } else{
+                    currentRow++;
+                } else {
                     break;
                 }
 
@@ -261,34 +294,34 @@ public class TagsLayout extends ViewGroup {
 
                 case ALIGN_BOTTOM:
 //                    curTop = verticalOffset + height - getPaddingBottom() - params.bottomMargin - childHeight;
-                    curTop = verticalOffset + lineMaxHeightMap.get(currentLine) - childHeight - params.bottomMargin;
+                    curTop = verticalOffset + lineMaxHeightMap.get(currentRow) - childHeight - params.bottomMargin;
                     break;
 
                 case ALIGN_CENTER:
                 default:
 //                    int holdHeight = height - getPaddingTop() - getPaddingBottom();
 //                    curTop = (holdHeight - childHeight) / 2;
-                    int childDifHeight = lineMaxHeightMap.get(currentLine) - childHeight - params.topMargin - params.bottomMargin;
-                    curTop = verticalOffset + childDifHeight/2;
+                    int childDifHeight = lineMaxHeightMap.get(currentRow) - childHeight - params.topMargin - params.bottomMargin;
+                    curTop = verticalOffset + childDifHeight / 2;
                     break;
             }
 
             //do the layout
             child.layout(curLeft, curTop, curLeft + childWidth, curTop + childHeight);
 
-            curLeft += childWidth + params.rightMargin;
+            curLeft += childWidth + params.rightMargin + horizontalSpace;
 
         }
     }
 
     /**
-     * 设定最大宽度,可以使用具体数值(大于等于0,单位dp),也可以使用相对的数值{@link #MAX_WIDTH_PARENT}, {@link #MAX_WIDTH_DEVICE}
+     * 设定最大宽度,可以使用具体数值(大于等于0,单位px),也可以使用相对的数值{@link #MAX_WIDTH_PARENT}, {@link #MAX_WIDTH_DEVICE}
      * , {@link #MAX_WIDTH_UNSPECIFIC}
      *
      * @param size
      */
     public void setMaxWidth(int size) {
-        setMaxWidth(TypedValue.COMPLEX_UNIT_DIP, size);
+        setMaxWidth(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
     /**
@@ -299,6 +332,7 @@ public class TagsLayout extends ViewGroup {
      * @param size The desired size in the given units.
      */
     public void setMaxWidth(int unit, int size) {
+        int pixelsSize;
         if (size >= 0) {
             Context c = getContext();
             Resources r;
@@ -308,18 +342,116 @@ public class TagsLayout extends ViewGroup {
                 r = c.getResources();
 
             }
-            maxWidth = (int) TypedValue.applyDimension(unit, size, r.getDisplayMetrics());
+            pixelsSize = (int) TypedValue.applyDimension(unit, size, r.getDisplayMetrics());
         } else if (size == MAX_WIDTH_PARENT || size == MAX_WIDTH_DEVICE) {
-            maxWidth = size;
+            pixelsSize = size;
         } else {
-            maxWidth = MAX_WIDTH_UNSPECIFIC;
+            pixelsSize = MAX_WIDTH_UNSPECIFIC;
         }
-        requestLayout();
+        if (pixelsSize != maxWidth) {
+            maxWidth = pixelsSize;
+            requestLayout();
+        }
     }
 
     public void setMaxWidthScale(float scale) {
-        maxWidthScale = scale;
-        requestLayout();
+        if (maxWidthScale != scale) {
+            maxWidthScale = scale;
+            requestLayout();
+        }
+    }
+
+    /**
+     * 设定一行中相邻child的水平间距,大于等于0,单位px
+     *
+     * @param horizontalSize
+     */
+    public void setHorizontalSpace(int horizontalSize) {
+        setHorizontalSpace(TypedValue.COMPLEX_UNIT_PX, horizontalSize);
+    }
+
+    /**
+     * 设定一行中相邻child的水平间距,大于等于0,单位{@link TypedValue}
+     *
+     * @param unit           The desired dimension unit.
+     * @param horizontalSize The desired size in the given units.
+     */
+    public void setHorizontalSpace(int unit, final int horizontalSize) {
+        int pixelsSize;
+        if (horizontalSize >= 0) {
+            Context c = getContext();
+            Resources r;
+            if (c == null) {
+                r = Resources.getSystem();
+            } else {
+                r = c.getResources();
+
+            }
+            pixelsSize = (int) TypedValue.applyDimension(unit, horizontalSize, r.getDisplayMetrics());
+            if (pixelsSize != horizontalSize) {
+                this.horizontalSpace = pixelsSize;
+                requestLayout();
+            }
+        }
+
+    }
+
+    /**
+     * 设定行间距,大于等于0,单位px
+     *
+     * @param verticalSize
+     */
+    public void setVerticalSpace(int verticalSize) {
+        setVerticalSpace(TypedValue.COMPLEX_UNIT_PX, verticalSize);
+    }
+
+    /**
+     * 设定行间距,大于等于0,单位{@link TypedValue}
+     *
+     * @param unit         The desired dimension unit.
+     * @param verticalSize The desired size in the given units.
+     */
+    public void setVerticalSpace(int unit, final int verticalSize) {
+        int pixelsSize;
+        if (verticalSize >= 0) {
+            Context c = getContext();
+            Resources r;
+            if (c == null) {
+                r = Resources.getSystem();
+            } else {
+                r = c.getResources();
+
+            }
+            pixelsSize = (int) TypedValue.applyDimension(unit, verticalSize, r.getDisplayMetrics());
+            if (pixelsSize != verticalSize) {
+                this.verticalSpace = pixelsSize;
+                requestLayout();
+            }
+        }
+    }
+
+    /**
+     * 设置每行的对齐方式
+     *
+     * @param align {@link #ALIGN_TOP}, {@link #ALIGN_BOTTOM}, {@link #ALIGN_CENTER}
+     */
+    public void setRowAlign(int align) {
+        if (align != rowAlign && align <= ALIGN_TOP && align >= ALIGN_CENTER) {
+            rowAlign = align;
+            requestLayout();
+        }
+    }
+
+    /**
+     * 设置最大行数
+     *
+     * @param count >= 0,或者 {@link #MAX_ROW_COUNT_ADJUST}
+     */
+    public void setMaxRowCount(int count) {
+        if (count != maxRowCount && count >= MAX_ROW_COUNT_ADJUST) {
+            maxRowCount = count;
+            requestLayout();
+        }
     }
 
     @Override

@@ -1,164 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@android:color/holo_orange_light">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.github.azenhuang.praticedemo.layout.TagsLayout
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@android:color/holo_green_light"
-        app:maxWidth="device"
-        app:lineSpace="30dp"
-        app:lineAlign="center">
-
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejlfa"/>
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@android:color/holo_blue_light"
-            android:text="kvalie"/>
-
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="djl;va;"/>
-
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
-
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejsefn;lkaeje;jvna;kleji;"/>
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:background="@android:color/holo_blue_light"
-            android:text="kvaliesfevase"/>
-
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="djl;va;"/>
-
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
-
-    </com.github.azenhuang.praticedemo.layout.TagsLayout>
-
-    <com.github.azenhuang.praticedemo.layout.TagsLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/holo_green_light"
-        app:maxWidth="parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_orange_light"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
+        <com.github.azenhuang.praticedemo.layout.TagsLayout
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_green_light"
+            app:horizontalSpace="10dp"
+            app:maxRowCount="adjust"
+            app:rowAlign="center"
+            app:verticalSpace="30dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="0ceshiejlfa" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="1kvalie" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:text="2中华人民共和国中央人民政府北上广深" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="3ceshiejfl;vnalkenljslehfiooienaveoij" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="4ceshiejsefn;lkaeje;jvna;kleji;" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="5kvaliesfevase" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="6djl;va;" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="7ceshiejfl;vnalkenljslehfiooienaveoij" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="8djl;va;" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="9ceshiejfl;vnalkenljslehfiooienaveoij" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="10ceshiejsefn;lkaeje;jvna;kleji;" />
+
+        </com.github.azenhuang.praticedemo.layout.TagsLayout>
+
+        <com.github.azenhuang.praticedemo.layout.TagsLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/holo_green_light"
+            app:horizontalSpace="10dp"
+            app:maxWidth="parent"
+            app:verticalSpace="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="ceshiejlfa" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="ceshihsdfoiaenlkvaefnkvalie" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="ceshidjl;va;" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="ceshiejfl;vnalkenljslehfiooienaveoij" />
+
+        </com.github.azenhuang.praticedemo.layout.TagsLayout>
+
+
+        <com.github.azenhuang.praticedemo.layout.TagsLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejlfa"/>
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshihsdfoiaenlkvaefnkvalie"/>
+            android:layout_marginTop="10dp"
+            android:background="@android:color/holo_green_light"
+            app:horizontalSpace="20dp"
+            app:maxRowCount="adjust"
+            app:maxWidth="parent"
+            app:verticalSpace="20dp">
 
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshidjl;va;"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="ceshiejlfa" />
 
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="ceshihsdfoiaenlkvaefnkvalie" />
 
-    </com.github.azenhuang.praticedemo.layout.TagsLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="ceshidjl;va;你好" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="ceshiejfl;vnalkenljslehfiooienaveoij" />
 
-    <com.github.azenhuang.praticedemo.layout.TagsLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/holo_green_light"
-        app:maxWidth="300dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="你好大结局就" />
 
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejlfa"/>
-        <TextView
-            android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshihsdfoiaenlkvaefnkvalie"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:background="@android:color/holo_blue_light"
+                android:text="ceshihsdfoiaenlkvaefnkvalie" />
 
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshidjl;va;"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="ceshidjl;va;" />
 
-        <TextView
-            android:paddingLeft="2dp"
-            android:paddingRight="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_blue_light"
-            android:text="ceshiejfl;vnalkenljslehfiooienaveoij"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/holo_blue_light"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="cewjofajow围殴福" />
 
-    </com.github.azenhuang.praticedemo.layout.TagsLayout>
+        </com.github.azenhuang.praticedemo.layout.TagsLayout>
 
-
-
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
