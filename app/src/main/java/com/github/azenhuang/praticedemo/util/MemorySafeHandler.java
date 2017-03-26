@@ -11,17 +11,17 @@ import android.util.Printer;
 import java.lang.ref.WeakReference;
 
 /**
- * 防止内存泄漏的Handler，用法同{@link Handler}。参照系统{@link Handler}对外提供的方法，并实现之。
+ * 解决系统{@link Handler}存在的内存泄漏的问题，用法同{@link Handler}。
  * 通过弱引用机制，切断Looper线程对引用了外部类（通常为Activity或Fragment）的内部类（Handler、Runnable、Callback）的强引用关系，
  * 因此Looper线程不会阻止外部类被回收，达到防止内存泄漏的目的
  * Memory safer implementation of android.os.Handler
- * <p>
+ *
  * Created by elvis on 17/3/26.
  */
 public class MemorySafeHandler {
     private final Handler.Callback mCallback; // hard reference to Callback. We need to keep callback in memory
-    private final ExecHandler execHandler;
-    private final SimpleArrayMap<Runnable, ExecRunnable> runnableMap = new SimpleArrayMap<>();
+    private final ExecHandler mExecHandler;
+    private final SimpleArrayMap<Runnable, ExecRunnable> mRunnableMap = new SimpleArrayMap<>();
 
     /**
      * Subclasses must implement this to receive messages.
@@ -68,7 +68,7 @@ public class MemorySafeHandler {
      */
     public MemorySafeHandler(Handler.Callback callback) {
         mCallback = callback;
-        execHandler = new ExecHandler(this, callback);
+        mExecHandler = new ExecHandler(this);
     }
 
     /**
@@ -89,7 +89,7 @@ public class MemorySafeHandler {
      */
     public MemorySafeHandler(Looper looper, Handler.Callback callback) {
         mCallback = callback;
-        execHandler = new ExecHandler(this, looper, callback);
+        mExecHandler = new ExecHandler(this, looper);
     }
 
 
@@ -102,7 +102,7 @@ public class MemorySafeHandler {
      * @param message The message whose name is being queried
      */
     public String getMessageName(Message message) {
-        return execHandler.getMessageName(message);
+        return mExecHandler.getMessageName(message);
     }
 
     /**
@@ -111,7 +111,7 @@ public class MemorySafeHandler {
      * If you don't want that facility, just call Message.obtain() instead.
      */
     public final Message obtainMessage() {
-        return Message.obtain(execHandler);
+        return Message.obtain(mExecHandler);
     }
 
     /**
@@ -121,7 +121,7 @@ public class MemorySafeHandler {
      * @return A Message from the global message pool.
      */
     public final Message obtainMessage(int what) {
-        return Message.obtain(execHandler, what);
+        return Message.obtain(mExecHandler, what);
     }
 
     /**
@@ -133,7 +133,7 @@ public class MemorySafeHandler {
      * @return A Message from the global message pool.
      */
     public final Message obtainMessage(int what, Object obj) {
-        return Message.obtain(execHandler, what, obj);
+        return Message.obtain(mExecHandler, what, obj);
     }
 
     /**
@@ -146,7 +146,7 @@ public class MemorySafeHandler {
      * @return A Message from the global message pool.
      */
     public final Message obtainMessage(int what, int arg1, int arg2) {
-        return Message.obtain(execHandler, what, arg1, arg2);
+        return Message.obtain(mExecHandler, what, arg1, arg2);
     }
 
     /**
@@ -160,7 +160,7 @@ public class MemorySafeHandler {
      * @return A Message from the global message pool.
      */
     public final Message obtainMessage(int what, int arg1, int arg2, Object obj) {
-        return Message.obtain(execHandler, what, arg1, arg2, obj);
+        return Message.obtain(mExecHandler, what, arg1, arg2, obj);
     }
 
     /**
@@ -174,7 +174,7 @@ public class MemorySafeHandler {
      * looper processing the message queue is exiting.
      */
     public final boolean post(Runnable r) {
-        return execHandler.post(wrapRunnable(r));
+        return mExecHandler.post(wrapRunnable(r));
     }
 
     /**
@@ -195,7 +195,7 @@ public class MemorySafeHandler {
      * occurs then the message will be dropped.
      */
     public final boolean postAtTime(Runnable r, long uptimeMillis) {
-        return execHandler.postAtTime(wrapRunnable(r), uptimeMillis);
+        return mExecHandler.postAtTime(wrapRunnable(r), uptimeMillis);
     }
 
     /**
@@ -217,7 +217,7 @@ public class MemorySafeHandler {
      * @see android.os.SystemClock#uptimeMillis
      */
     public final boolean postAtTime(Runnable r, Object token, long uptimeMillis) {
-        return execHandler.postAtTime(wrapRunnable(r), token, uptimeMillis);
+        return mExecHandler.postAtTime(wrapRunnable(r), token, uptimeMillis);
     }
 
     /**
@@ -239,7 +239,7 @@ public class MemorySafeHandler {
      * occurs then the message will be dropped.
      */
     public final boolean postDelayed(Runnable r, long delayMillis) {
-        return execHandler.postDelayed(wrapRunnable(r), delayMillis);
+        return mExecHandler.postDelayed(wrapRunnable(r), delayMillis);
     }
 
     /**
@@ -257,14 +257,14 @@ public class MemorySafeHandler {
      * looper processing the message queue is exiting.
      */
     public final boolean postAtFrontOfQueue(Runnable r) {
-        return execHandler.postAtFrontOfQueue(wrapRunnable(r));
+        return mExecHandler.postAtFrontOfQueue(wrapRunnable(r));
     }
 
     /**
      * Remove any pending posts of Runnable r that are in the message queue.
      */
     public final void removeCallbacks(Runnable r) {
-        execHandler.removeCallbacks(runnableMap.get(r));
+        mExecHandler.removeCallbacks(mRunnableMap.get(r));
     }
 
     /**
@@ -273,7 +273,7 @@ public class MemorySafeHandler {
      * all callbacks will be removed.
      */
     public final void removeCallbacks(Runnable r, Object token) {
-        execHandler.removeCallbacks(runnableMap.get(r), token);
+        mExecHandler.removeCallbacks(mRunnableMap.get(r), token);
     }
 
     /**
@@ -286,7 +286,7 @@ public class MemorySafeHandler {
      * looper processing the message queue is exiting.
      */
     public final boolean sendMessage(Message msg) {
-        return execHandler.sendMessage(msg);
+        return mExecHandler.sendMessage(msg);
     }
 
     /**
@@ -297,7 +297,7 @@ public class MemorySafeHandler {
      * looper processing the message queue is exiting.
      */
     public final boolean sendEmptyMessage(int what) {
-        return execHandler.sendEmptyMessage(what);
+        return mExecHandler.sendEmptyMessage(what);
     }
 
     /**
@@ -310,7 +310,7 @@ public class MemorySafeHandler {
      * @see #sendMessageDelayed(android.os.Message, long)
      */
     public final boolean sendEmptyMessageDelayed(int what, long delayMillis) {
-        return execHandler.sendEmptyMessageDelayed(what, delayMillis);
+        return mExecHandler.sendEmptyMessageDelayed(what, delayMillis);
     }
 
     /**
@@ -324,7 +324,7 @@ public class MemorySafeHandler {
      */
 
     public final boolean sendEmptyMessageAtTime(int what, long uptimeMillis) {
-        return execHandler.sendEmptyMessageAtTime(what, uptimeMillis);
+        return mExecHandler.sendEmptyMessageAtTime(what, uptimeMillis);
     }
 
     /**
@@ -340,7 +340,7 @@ public class MemorySafeHandler {
      * occurs then the message will be dropped.
      */
     public final boolean sendMessageDelayed(Message msg, long delayMillis) {
-        return execHandler.sendMessageDelayed(msg, delayMillis);
+        return mExecHandler.sendMessageDelayed(msg, delayMillis);
     }
 
     /**
@@ -362,7 +362,7 @@ public class MemorySafeHandler {
      * occurs then the message will be dropped.
      */
     public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
-        return execHandler.sendMessageAtTime(msg, uptimeMillis);
+        return mExecHandler.sendMessageAtTime(msg, uptimeMillis);
     }
 
     /**
@@ -378,7 +378,7 @@ public class MemorySafeHandler {
      * looper processing the message queue is exiting.
      */
     public final boolean sendMessageAtFrontOfQueue(Message msg) {
-        return execHandler.sendMessageAtFrontOfQueue(msg);
+        return mExecHandler.sendMessageAtFrontOfQueue(msg);
     }
 
     /**
@@ -386,7 +386,7 @@ public class MemorySafeHandler {
      * message queue.
      */
     public final void removeMessages(int what) {
-        execHandler.removeMessages(what);
+        mExecHandler.removeMessages(what);
     }
 
     /**
@@ -395,7 +395,7 @@ public class MemorySafeHandler {
      * all messages will be removed.
      */
     public final void removeMessages(int what, Object object) {
-        execHandler.removeMessages(what, object);
+        mExecHandler.removeMessages(what, object);
     }
 
     /**
@@ -404,7 +404,7 @@ public class MemorySafeHandler {
      * all callbacks and messages will be removed.
      */
     public final void removeCallbacksAndMessages(Object token) {
-        execHandler.removeCallbacksAndMessages(token);
+        mExecHandler.removeCallbacksAndMessages(token);
     }
 
     /**
@@ -412,7 +412,7 @@ public class MemorySafeHandler {
      * the message queue.
      */
     public final boolean hasMessages(int what) {
-        return execHandler.hasMessages(what);
+        return mExecHandler.hasMessages(what);
     }
 
     /**
@@ -420,17 +420,17 @@ public class MemorySafeHandler {
      * whose obj is 'object' in the message queue.
      */
     public final boolean hasMessages(int what, Object object) {
-        return execHandler.hasMessages(what, object);
+        return mExecHandler.hasMessages(what, object);
     }
 
     // if we can get rid of this method, the handler need not remember its loop
     // we could instead export a getMessageQueue() method...
     public final Looper getLooper() {
-        return execHandler.getLooper();
+        return mExecHandler.getLooper();
     }
 
     public final void dump(Printer pw, String prefix) {
-        execHandler.dump(pw, prefix);
+        mExecHandler.dump(pw, prefix);
     }
 
     @Override
@@ -445,31 +445,21 @@ public class MemorySafeHandler {
             throw new NullPointerException("Runnable can't be null");
         }
         ExecRunnable execRunnable = new ExecRunnable(r);
-        runnableMap.put(r, execRunnable);
+        mRunnableMap.put(r, execRunnable);
         return execRunnable;
     }
 
     private static final class ExecHandler extends Handler {
-        private final WeakReference<Callback> mCallbackRef;
         private final WeakReference<MemorySafeHandler> mSafeHandlerRef;
 
-        ExecHandler(MemorySafeHandler safeHandler) {
-            this(safeHandler, (Callback) null);
-        }
-
-        ExecHandler(MemorySafeHandler safeHandler, Callback callback) {
+        private ExecHandler(MemorySafeHandler safeHandler) {
+            super((Callback) null);
             mSafeHandlerRef = new WeakReference<>(safeHandler);
-            mCallbackRef = new WeakReference<>(callback);
         }
 
-        ExecHandler(MemorySafeHandler safeHandler, Looper looper) {
-            this(safeHandler, looper, null);
-        }
-
-        ExecHandler(MemorySafeHandler safeHandler, Looper looper, Callback callback) {
+        private ExecHandler(MemorySafeHandler safeHandler, Looper looper) {
             super(looper);
             mSafeHandlerRef = new WeakReference<>(safeHandler);
-            mCallbackRef = new WeakReference<>(callback);
         }
 
         @Override
@@ -496,7 +486,7 @@ public class MemorySafeHandler {
     private static final class ExecRunnable implements Runnable {
         private final WeakReference<Runnable> mDelegate;
 
-        ExecRunnable(Runnable delegate) {
+        private ExecRunnable(Runnable delegate) {
             mDelegate = new WeakReference<>(delegate);
         }
 

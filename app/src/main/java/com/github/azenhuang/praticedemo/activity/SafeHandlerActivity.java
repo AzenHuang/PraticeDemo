@@ -18,6 +18,8 @@ import com.github.azenhuang.praticedemo.util.MemorySafeHandler;
 public class SafeHandlerActivity extends AppCompatActivity {
     static final String TAG = SafeHandlerActivity.class.getSimpleName();
     private static final int DELAY_TIME = 6000;
+    private static final int MESSAGE_OVERRIDE = 1;
+    private static final int MESSAGE_CALLBACK = 2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class SafeHandlerActivity extends AppCompatActivity {
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handler2.sendEmptyMessageDelayed(1, DELAY_TIME);
+                handler2.sendEmptyMessageDelayed(MESSAGE_OVERRIDE, DELAY_TIME);
 
             }
         });
@@ -69,12 +71,18 @@ public class SafeHandlerActivity extends AppCompatActivity {
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handler3.sendEmptyMessageDelayed(1, DELAY_TIME);
+                handler3.sendEmptyMessageDelayed(MESSAGE_CALLBACK, DELAY_TIME);
 
             }
         });
 
+        findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                handler3.sendEmptyMessageDelayed(1, DELAY_TIME);
 
+            }
+        });
 
     }
 }
