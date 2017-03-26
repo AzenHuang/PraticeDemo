@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.github.azenhuang.praticedemo.R;
-import com.github.azenhuang.praticedemo.util.SafeHandler;
+import com.github.azenhuang.praticedemo.util.MemorySafeHandler;
 
 /**
  * Created by huangyongzheng on 3/24/17.
@@ -17,7 +17,7 @@ import com.github.azenhuang.praticedemo.util.SafeHandler;
 
 public class SafeHandlerActivity extends AppCompatActivity {
     static final String TAG = SafeHandlerActivity.class.getSimpleName();
-    private static final int DELAY_TIME = 2000;
+    private static final int DELAY_TIME = 6000;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +31,8 @@ public class SafeHandlerActivity extends AppCompatActivity {
                 Log.d(TAG, "run over");
             }
         };
-        final SafeHandler handler1 = new SafeHandler();
+//        final SafeHandler handler1 = new SafeHandler();
+        final MemorySafeHandler handler1 = new MemorySafeHandler();
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +40,8 @@ public class SafeHandlerActivity extends AppCompatActivity {
             }
         });
 
-        final SafeHandler handler2 = new SafeHandler() {
+//        final SafeHandler handler2 = new SafeHandler() {
+        final MemorySafeHandler handler2 = new MemorySafeHandler() {
             @Override
             public void handleMessage(Message msg) {
                 Log.d(TAG, "Override handleMessage done");
@@ -55,7 +57,8 @@ public class SafeHandlerActivity extends AppCompatActivity {
         });
 
 
-        final SafeHandler handler3 = new SafeHandler(new Handler.Callback() {
+//        final SafeHandler handler3 = new SafeHandler(new Handler.Callback() {
+        final MemorySafeHandler handler3 = new MemorySafeHandler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
                 Log.d(TAG, "Handler.Callback done");
