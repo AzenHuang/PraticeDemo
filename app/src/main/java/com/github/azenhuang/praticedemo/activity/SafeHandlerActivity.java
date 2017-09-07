@@ -80,6 +80,10 @@ public class SafeHandlerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                handler3.sendEmptyMessageDelayed(1, DELAY_TIME);
+//                handler1.removeCallbacks(runnable);
+//                handler2.removeMessages(MESSAGE_OVERRIDE);
+//                handler3.removeMessages(MESSAGE_CALLBACK);
+                handler3.removeCallbacksAndMessages(null);
 
             }
         });

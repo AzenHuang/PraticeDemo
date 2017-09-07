@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/mteditext_relative_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        tools:background="@drawable/commonui_edittext_container_style">
+
+        <TextView
+            android:id="@+id/mtedittext_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/commonui_edittext_padding_left"
+            android:paddingTop="@dimen/commonui_edittext_padding_right"
+            android:paddingBottom="@dimen/commonui_edittext_padding_right"
+            android:layout_centerVertical="true"
+            android:text="文案:"
+            android:textColor="@color/commonui_editext_text_color"
+            android:textSize="@dimen/commonui_edittext_textsize"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <FrameLayout
+            android:id="@+id/mtedittext_right_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_marginRight="@dimen/commonui_edittext_padding_right"
+            android:layout_marginEnd="@dimen/commonui_edittext_padding_right"
+            android:layout_marginBottom="@dimen/commonui_edittext_padding_right"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/mtedittext_inside_right_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="警告信息"
+                android:textColor="@color/commonui_editext_warning_color"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/mtedittext_right_view"
+                android:layout_width="@dimen/commonui_edittext_clear_icon_size"
+                android:layout_height="@dimen/commonui_edittext_clear_icon_size"
+                android:src="@drawable/commonui_editext_clear"
+                android:visibility="gone"
+                tools:visibility="visible" />
+        </FrameLayout>
+
+
+        <ViewStub
+            android:id="@+id/mtedittext_main_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/mtedittext_title"
+            android:layout_toLeftOf="@id/mtedittext_right_container"
+            android:layout_toRightOf="@id/mtedittext_title"
+            android:layout_toStartOf="@id/mtedittext_right_container"
+            android:layout_alignWithParentIfMissing="true"
+            tools:background="@drawable/commonui_edittext_multitext_style"
+            tools:visibility="visible" />
+        <!--<EditText-->
+        <!--android:id="@+id/mtedittext_main_content"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toEndOf="@id/mtedittext_title"-->
+        <!--android:layout_toLeftOf="@id/mtedittext_right_container"-->
+        <!--android:layout_toRightOf="@id/mtedittext_title"-->
+        <!--android:layout_toStartOf="@id/mtedittext_right_container"-->
+        <!--android:layout_alignWithParentIfMissing="true"-->
+        <!--android:background="@null"-->
+        <!--tools:background="@drawable/commonui_edittext_multitext_style"-->
+        <!--android:inputType="text"-->
+        <!--android:paddingBottom="@dimen/commonui_edittext_padding_right"-->
+        <!--android:paddingLeft="@dimen/commonui_edittext_padding_left"-->
+        <!--android:paddingRight="@dimen/commonui_edittext_padding_right"-->
+        <!--android:paddingTop="@dimen/commonui_edittext_padding_right"-->
+        <!--android:selectAllOnFocus="true"-->
+        <!--android:textColor="@color/commonui_editext_text_color"-->
+        <!--android:textSize="@dimen/commonui_edittext_textsize"-->
+        <!--tools:visibility="visible"/>-->
+
+        <RelativeLayout
+            android:id="@+id/bottom_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mtedittext_main_content">
+            <!--android:layout_below="@id/mtedittext_main_content"-->
+            <TextView
+                android:id="@+id/mtedittext_inside_left_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/commonui_edittext_padding_right"
+                android:text="hint"
+                android:textSize="14sp"
+                android:textColor="@color/commonui_editext_hint_text_color"
+                android:layout_marginTop="@dimen/commonui_edittext_anonymous_margin"
+                android:layout_marginBottom="@dimen/commonui_edittext_anonymous_margin"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/mtedittext_inside_right_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/commonui_edittext_padding_right"
+                android:text="hint"
+                android:clickable="true"
+                android:textColor="@color/commonui_editext_hint_text_color"
+                android:layout_marginTop="@dimen/commonui_edittext_anonymous_margin"
+                android:layout_marginBottom="@dimen/commonui_edittext_anonymous_margin"
+                android:visibility="gone"
+                tools:visibility="visible" />
+            <!--android:background="@drawable/common_ui_edittext_right_inside_button"-->
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/mtedittext_outside_right_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/commonui_edittext_padding_right"
+        android:layout_marginTop="@dimen/commonui_edittext_outside_padding_right"
+        android:layout_gravity="right|bottom"
+        android:text="警告信息"
+        android:textColor="@color/commonui_editext_warning_color"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</merge>

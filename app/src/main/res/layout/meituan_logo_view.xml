@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp" />
+
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:circleColor="@android:color/holo_orange_dark"
+            app:logoText="点评" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:circleColor="@android:color/holo_blue_dark"
+            app:logoText="百度百科" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:backgroundColor="@android:color/holo_red_dark"
+            app:circleColor="@android:color/transparent"
+            app:logoText="有道" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:textColor="@android:color/black"
+            app:circleColor="@android:color/transparent"
+            app:backgroundColor="@android:color/holo_orange_light"
+            app:logoText="闲鱼" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:circleColor="@android:color/holo_red_light"
+            app:logoText="头条" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundColor="#06c1ae"
+            app:circleColor="@android:color/white"
+            app:textColor="#06c1ae"
+            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
+            android:background="@android:color/black" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            app:circleColor="@android:color/holo_orange_dark"
+            app:logoText="点评" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            app:circleColor="@android:color/holo_blue_dark"
+            app:logoText="百度百科" />
+
+        <com.github.azenhuang.praticedemo.view.LogoView
+            android:layout_marginTop="10dp"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            app:backgroundColor="@android:color/holo_red_dark"
+            app:circleColor="@android:color/transparent"
+            app:logoText="有道"
+            app:cornerRadius="20dp" />
+    </LinearLayout>
+
+
+    <com.github.azenhuang.praticedemo.view.LogoView
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cornerRadius="20dp" />
+</LinearLayout>

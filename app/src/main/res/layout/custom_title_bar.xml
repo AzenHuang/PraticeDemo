@@ -1,0 +1,40 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@android:color/holo_green_light">
+
+    <ImageView
+        android:id="@+id/title_bar_left"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_margin="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/title_bar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:lines="1"
+        android:textSize="18sp"
+        tools:textColor="@android:color/white"
+        tools:text="吃喝玩乐全都有" />
+
+    <ImageView
+        android:id="@+id/title_bar_right"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/title_bar_left"
+        android:layout_alignBottom="@+id/title_bar_left"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        tools:src="@drawable/ic_add" />
+</merge>

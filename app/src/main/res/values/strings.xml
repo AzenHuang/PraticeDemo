@@ -2,4 +2,16 @@
     <string name="app_name">PraticeDemo</string>
     <string name="hello_world">对于一个属性可以在多个地方指定它的值，如XML直接定义，style，Theme，而这些位置定义的值有一个优先级，按优先级从高到低依次是：
                     \nXML中>style定义>Theme中的defStyleAttr引用值或defStyleRes指定的默认值>Theme中指定</string>
+
+    <string name="commonui_editext_title">文案:</string>
+    <string name="commonui_editext_hint">请写下您的文案</string>
+    <string name="commonui_editext_right_below_hint">您的文案</string>
+    <string name="commonui_editext_pay_title">消费总额：</string>
+    <string name="commonui_editext_pay_hint">询问服务员后输入</string>
+    <string name="commonui_editext_comment">评论</string>
+    <string name="commonui_editext_left_behind_hint">还差五个字</string>
+    <string name="commonui_editext_anonymous">匿名</string>
+    <string name="commonui_editext_anonymoused">已匿名</string>
+    <string name="commonui_editext_warning">警告</string>
+    <string name="commonui_editext_outside_warning">警告外面</string>
 </resources>

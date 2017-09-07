@@ -12,6 +12,8 @@ import com.github.azenhuang.praticedemo.R;
 import com.github.azenhuang.praticedemo.util.MemorySafeAsyncTask;
 import com.github.azenhuang.praticedemo.util.SafeAsyncTask;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by huangyongzheng on 3/24/17.
  */
@@ -31,13 +33,13 @@ public class AsyncTaskActivity extends AppCompatActivity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MyAsyncTask().execute((Void) null);
+                new MyAsyncTask(progressBar).execute((Void) null);
             }
         });
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MyAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+                new MyAsyncTask(progressBar).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
             }
         });
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
@@ -57,8 +59,13 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
     }
 
-    private class MyAsyncTask extends AsyncTask<Void, Integer, Void> {
+    private static class MyAsyncTask extends AsyncTask<Void, Integer, Void> {
         int progress = 0;
+        private WeakReference<ProgressBar> progressBarWeakReference;
+
+        public MyAsyncTask(ProgressBar progressBar) {
+            progressBarWeakReference = new WeakReference<ProgressBar>(progressBar);
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -87,7 +94,10 @@ public class AsyncTaskActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Integer... values) {
-            progressBar.setProgress(values[0]);
+            ProgressBar progressBar = progressBarWeakReference.get();
+            if (progressBar != null) {
+                progressBar.setProgress(values[0]);
+            }
             Log.d(TAG, this.toString() + ">>>" + progress);
         }
     }

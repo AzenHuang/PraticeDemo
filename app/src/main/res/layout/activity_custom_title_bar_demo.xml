@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.azenhuang.praticedemo.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_green_light"
+        app:left_drawable="@drawable/ic_back"
+        app:right_drawable="@drawable/ic_add"
+        app:title_text_color="@color/colorAccent"
+        app:title_text_size="24sp"
+        app:title_text="标题1" />
+
+    <com.github.azenhuang.praticedemo.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        app:left_drawable="@drawable/ic_back"
+        android:background="@android:color/holo_green_dark"
+        app:title_text="标题2" />
+
+    <com.github.azenhuang.praticedemo.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_red_light"
+        app:title_text_color="@color/colorPrimaryDark"
+        app:title_text_size="14sp"
+        app:title_text="标题3" />
+
+    <com.github.azenhuang.praticedemo.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_red_dark"
+        app:right_drawable="@drawable/ic_add"
+        app:title_text="标题4" />
+
+    <com.github.azenhuang.praticedemo.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/holo_blue_light"
+        app:right_drawable="@drawable/ic_add"
+        app:title_text_color="@android:color/holo_orange_dark"
+        app:title_text_size="24sp"
+        app:title_text="标题5" />
+
+    <com.github.azenhuang.praticedemo.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        app:left_drawable="@drawable/ic_back"
+        app:right_drawable="@drawable/ic_add"
+        android:background="@android:color/holo_blue_dark"
+        app:title_text="标题6"
+        app:title_text_color="@android:color/black" />
+
+</LinearLayout>

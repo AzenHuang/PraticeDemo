@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="commonui_editext_warning_color">#FF9900</color>
+    <color name="commonui_editext_text_color">#666666</color>
+    <color name="commonui_editext_pay_text_color">#333333</color>
+    <color name="commonui_editext_hint_text_color">#C7C7CC</color>
+    <color name="commonui_editext_button_text_color">#DEE1E4</color>
+    <color name="commonui_editext_button_click">#F8F8F8</color>
+    <color name="commonui_editext_button_normal">#FFFFFF</color>
 </resources>

@@ -3,4 +3,21 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="textSize">12dp</dimen>
+
+    <dimen name="commonui_edittext_textsize">15sp</dimen>
+    <dimen name="commonui_edittext_width">360dp</dimen>
+    <dimen name="commonui_edittext_height">45dp</dimen>
+    <dimen name="commonui_edittext_right_textsize">12sp</dimen>
+    <dimen name="commonui_edittext_right_hint_textsize">14sp</dimen>
+    <dimen name="commonui_edittext_padding_left">12dp</dimen>
+    <dimen name="commonui_edittext_padding_right">15dp</dimen>
+    <dimen name="commonui_edittext_anonymous_margin">11.5dp</dimen>
+    <dimen name="commonui_edittext_outside_padding_top">2dp</dimen>
+    <dimen name="commonui_edittext_outside_padding_right">10dp</dimen>
+    <dimen name="commonui_edittext_pay_padding_right">6dp</dimen>
+    <dimen name="commonui_edittext_pay_hint_padding_top">16dp</dimen>
+    <dimen name="commonui_edittext_pay_padding_top">8dp</dimen>
+    <dimen name="commonui_edittext_clear_icon_size">20dp</dimen>
+    <dimen name="commonui_edittext_pay_text_size">28sp</dimen>
+    <dimen name="commonui_edittext_pay_hint_text_size">16sp</dimen>
 </resources>

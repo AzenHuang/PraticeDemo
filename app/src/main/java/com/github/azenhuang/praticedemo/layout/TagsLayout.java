@@ -76,7 +76,9 @@ public class TagsLayout extends ViewGroup {
     }
 
     public TagsLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+        super(context, attrs, defStyleAttr);
+        deviceWidth = context.getResources().getDisplayMetrics().widthPixels;
+        initFromAttributes(context, attrs, defStyleAttr, 0);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

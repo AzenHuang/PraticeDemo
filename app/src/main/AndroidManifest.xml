@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.github.azenhuang.praticedemo">
 
     <application
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity
+            android:name=".activity.MainActivity"
+            android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +22,6 @@
         <activity android:name=".activity.CustomViewActivity"
             android:theme="@style/NoActionBarTheme"
             android:hardwareAccelerated="false" />
-
-        <activity android:name=".activity.RoundImageViewActivity"
-            android:theme="@style/NoActionBarTheme"/>
 
         <activity android:name=".activity.TagsLayoutActivity"
             android:theme="@style/NoActionBarTheme"/>
@@ -36,6 +35,37 @@
         <activity android:name=".activity.AsyncTaskActivity"
             android:theme="@style/NoActionBarTheme"/>
 
+        <activity android:name=".activity.launch.LaunchModeActivity" />
+
+        <activity
+            android:name=".activity.launch.StandardActivity"
+            android:launchMode="standard">
+            <intent-filter>
+                <action android:name="android.intent.action.hyz" />
+
+                <category android:name="android.intent.category.hyz" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.launch.SingleTopActivity"
+            android:launchMode="singleTop" />
+
+        <activity
+            android:name=".activity.launch.SingleTaskActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".activity.launch.SingleInstanceActivity"
+            android:launchMode="singleInstance" />
+
+        <activity android:name=".activity.VisibleRectActivity" />
+        <activity android:name=".activity.LaunchCountActivity" />
+
+        <service
+            android:name=".activity.NewProcessService"
+            android:process=":service" />
     </application>
 
 </manifest>

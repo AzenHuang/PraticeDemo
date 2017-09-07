@@ -18,7 +18,7 @@
         <item name="attr_two">attr two from theme</item>
         <item name="attr_three">attr three from theme</item>
         <item name="attr_four">attr four from theme</item>
-        <item name="CustomizeStyle">@style/CustomizeStyleInTheme</item>
+        <item name="CustomizeDefStyleAttr">@style/CustomizeStyleInTheme</item>
 
     </style>
 
@@ -37,10 +37,11 @@
         <item name="attr_two">attr two from style</item>
     </style>
 
-    <style name="DefaultCustomizeStyle">
+    <style name="CustomizeDefStyleRes">
         <item name="attr_one">attr one from defalut style res</item>
         <item name="attr_two">attr two from defalut style res</item>
         <item name="attr_three">attr three from defalut style res</item>
+        <item name="attr_four">attr four from defalut style res</item>
     </style>
 
 

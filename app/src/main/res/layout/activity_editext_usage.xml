@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:fadingEdge="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_basic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:edittexttype="basic" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="basic_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="basic_clear" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_image_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="image_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_inside_warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="inside_right_warning" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_outside_warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="outside_right_warning" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_multline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="multiline" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_border"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="multiline_hint_border" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_border_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="multiline_all_hint" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="comment" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_multiline_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="multiline_comment" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="pay" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@android:color/holo_purple"
+            android:visibility="visible" />
+
+        <com.github.azenhuang.praticedemo.view.edittext.MtEditText
+            android:id="@+id/editext_with_basic_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:edittexttype="largetext" />
+
+    </LinearLayout>
+</ScrollView>

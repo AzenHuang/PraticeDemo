@@ -1,0 +1,43 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.github.azenhuang.praticedemo.view.RoundImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/meituan_waimai" />
+
+        <com.github.azenhuang.praticedemo.view.RoundImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/meituan_waimai"
+            android:scaleType="centerCrop"
+            app:borderRadius="8dp" />
+
+        <com.github.azenhuang.praticedemo.view.RoundImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/meituan_waimai"
+            app:borderRadius="40dp" />
+
+        <com.github.azenhuang.praticedemo.view.RoundImageView
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/meituan_waimai"
+            android:scaleType="centerCrop"
+            app:borderRadius="300dp" />
+    </LinearLayout>
+
+</ScrollView>
